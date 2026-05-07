@@ -30,7 +30,7 @@ export function useClaim(): UseClaimResult {
   } = useWriteContract();
 
   const {
-    isPending: isConfirming,
+    isPending: isReceiptPending,
     isSuccess,
     isError: isReceiptError,
     error: receiptError,
@@ -38,6 +38,10 @@ export function useClaim(): UseClaimResult {
     hash: txHash,
     query: { enabled: Boolean(txHash) },
   });
+
+  // In TanStack Query v5, a disabled query with no data returns isPending=true.
+  // Only treat as confirming when we actually have a txHash in flight.
+  const isConfirming = Boolean(txHash) && isReceiptPending;
 
   // Invalidate all wagmi query cache on confirmation so useFaucet refetches
   useEffect(() => {
