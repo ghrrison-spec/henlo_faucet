@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-yellow: #F3C734;
+  --color-blue: #2F63FA;
+  --color-green: #63DE77;
+  --color-grey: #BABABA;
+  --color-red: #ff4444;
+  --color-paper: #f0e8d0;
+  --color-ink: #1a1208;
+}
+
+/* Custom cursor */
+*, *::before, *::after {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='6' fill='%23F3C734' stroke='black' stroke-width='2'/%3E%3C/svg%3E") 12 12, auto;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: var(--color-grey);
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-yellow);
+}
+
+/* Scanline overlay */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.12) 3px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+}
+
+/* Corner glow elements */
+.corner-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+.corner-glow-tl {
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, var(--color-blue) 0%, transparent 70%);
+}
+.corner-glow-tr {
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, var(--color-blue) 0%, transparent 70%);
+}
+.corner-glow-bl {
+  bottom: -100px;
+  left: -100px;
+  background: radial-gradient(circle, var(--color-yellow) 0%, transparent 70%);
+}
+.corner-glow-br {
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, var(--color-yellow) 0%, transparent 70%);
+}
+
+/* Construction banner pattern */
+.construction-stripe {
+  background: repeating-linear-gradient(
+    45deg,
+    #F3C734,
+    #F3C734 10px,
+    #000 10px,
+    #000 20px
+  );
+}
+
+/* Paper texture for claim card */
+.paper-texture {
+  background-color: var(--color-paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f0e8d0'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='rgba(26,18,8,0.05)'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='rgba(26,18,8,0.05)'/%3E%3C/svg%3E");
+}
+
+/* Jackpot coin rain */
+@keyframes coinFall {
+  0% { transform: translateY(-20px) rotate(0deg) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg) scale(0.5); opacity: 0; }
+}
+
+.coin {
+  position: fixed;
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: coinFall var(--duration, 1s) ease-in var(--delay, 0s) forwards;
+  z-index: 9999;
+}

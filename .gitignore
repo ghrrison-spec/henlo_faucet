@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# next
+.next/
+out/
+
+# env — never commit real credentials
+.env*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# debug
+npm-debug.log*
+pnpm-debug.log*
