@@ -22,7 +22,10 @@ function brandError(error: Error | null): string {
   if (msg.includes('network') || msg.includes('fetch') || msg.includes('timeout')) {
     return 'NETWORK OOGA. try again.';
   }
-  return 'ALREADY CLAIMED TODAY. ooga booga. come back tomorrow.';
+  if (msg.includes('already claimed') || msg.includes('cooldown') || msg.includes('wait')) {
+    return 'ALREADY CLAIMED TODAY. ooga booga. come back tomorrow.';
+  }
+  return 'CLAIM FAILED. check console for details.';
 }
 
 const COINS = ['🪙', '💛', '⭐', '🐾', '✨'];
@@ -117,6 +120,7 @@ export default function TxStatus({ claimState, nextClaimDay }: TxStatusProps) {
   }
 
   if (isError) {
+    if (error) console.error('[henlo faucet] claim error:', error);
     return (
       <div className="flex flex-col items-center gap-3 py-4">
         <Image

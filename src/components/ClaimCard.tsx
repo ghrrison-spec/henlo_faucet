@@ -281,10 +281,8 @@ export default function ClaimCard() {
 
         {state === 'ELIGIBLE' && (
           <>
-            <p
-              className="font-special-elite text-brand-ink text-lg uppercase tracking-wide font-bold border-2 border-brand-ink px-3 py-1 animate-blink-slow"
-            >
-              ⚠ CLAIM YOUR HENLO ⚠
+            <p className="font-vt323 text-brand-ink/70 text-base tracking-wide">
+              ready to claim
             </p>
             <button
               onClick={claim}
