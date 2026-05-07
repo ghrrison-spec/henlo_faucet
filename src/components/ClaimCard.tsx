@@ -102,9 +102,12 @@ export default function ClaimCard() {
   useEffect(() => {
     if (canClaim === false) setJustClaimed(false);
   }, [canClaim]);
-  // Clear on address change — different wallet must not inherit prior wallet's claim state
+  // Clear all tx state on wallet disconnect or address change
+  // Without this, isPending stays true across reconnects and shows the tx animation on connect
   useEffect(() => {
     setJustClaimed(false);
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
   // Optimistic nextClaimDay: use tomorrow's day number until refetch resolves
