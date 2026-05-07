@@ -69,7 +69,27 @@ export default function TxStatus({ claimState, nextClaimDay }: TxStatusProps) {
     }
   }, [isSuccess]);
 
-  if (isPending || isConfirming) {
+  if (isPending) {
+    return (
+      <div className="flex flex-col items-center gap-3 py-4">
+        <Image
+          src="/poku-flamethrower.png"
+          alt="poku flamethrower"
+          width={80}
+          height={80}
+          className="animate-bounce"
+        />
+        <p className="font-vt323 text-brand-yellow text-xl tracking-widest animate-blink">
+          CONFIRM IN WALLET...
+        </p>
+        <p className="font-vt323 text-brand-grey text-sm">
+          check your wallet for a signing prompt
+        </p>
+      </div>
+    );
+  }
+
+  if (isConfirming) {
     return (
       <div className="flex flex-col items-center gap-3 py-4">
         <Image
